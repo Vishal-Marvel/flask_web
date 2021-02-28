@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User Profile
+{%endblock%}
+
+{% block content %}
+
+	<h1>User details of '{{data['name']}}'</h1>
+    </br>
+    <h3>Name: {{data['f_name']}} {{data['l_name']}}</h3>
+    <br>
+	<a href="{{url_for('reset_pass',name = data['name'] )}}">Reset Password</a>
+
+{% endblock %}
