@@ -11,7 +11,8 @@
 	
 {% endfor %}
 
-	<h1>Welcome to model exam Login page</h1>
+	<h1>Welcome to model exam </h1>
+	<h2>Login page</h2>
 	<br/>
 	<form method="POST">
 		{{ form.hidden_tag() }}
@@ -23,11 +24,30 @@
 		{{ form.pass_w.label(class="form-label") }}
 
 		{{ form.pass_w(class="form-control") }}
-		<br/>
+		<a class="unselectable kinda-link" id="eye" onclick="toggle()" style="cursor: pointer">Show Password</a>
+
+		<br/><br/>
 		{{ form.submit(class="btn btn-secondary") }}
 		<br/><br/>
 		<a href="{{url_for('forgot_pass')}}">Forgot Password</a>
 		
 	</form>
+	<script>
+		var state = false;
+		function toggle(){
+			if(state){
+				document.getElementById(
+					"pass_w").setAttribute("type","password");
+				document.getElementById("eye").style.color='#7a797e';
+				state = false;
+			}
+			else{
+				document.getElementById(
+					"pass_w").setAttribute("type","text");
+				document.getElementById("eye").style.color='#5887ef';
 
+				state = true;
+			}
+		}
+	</script>
 {% endblock %}

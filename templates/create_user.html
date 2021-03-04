@@ -5,6 +5,9 @@ New User
 {%endblock%}
 
 {% block content %}
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 {% for message in get_flashed_messages() %}
 	
 	<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -42,10 +45,28 @@ New User
         {{ form.pass_w.label(class="form-label") }}
 
 		{{ form.pass_w(class="form-control") }}
-		<br/>
+		<a class="unselectable kinda-link" id="eye" onclick="toggle()" style="cursor: pointer">Show Password</a>
+		<br/><br/>
 		
         {{ form.submit(class="btn btn-secondary") }}
 		<br/><br/>
 	</form>
+	<script>
+		var state = false;
+		function toggle(){
+			if(state){
+				document.getElementById(
+					"pass_w").setAttribute("type","password");
+				document.getElementById("eye").style.color='#7a797e';
+				state = false;
+			}
+			else{
+				document.getElementById(
+					"pass_w").setAttribute("type","text");
+				document.getElementById("eye").style.color='#5887ef';
 
+				state = true;
+			}
+		}
+	</script>
 {% endblock %}

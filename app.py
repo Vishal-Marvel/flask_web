@@ -1,33 +1,9 @@
 from flask import Flask, render_template, flash, Markup, redirect, url_for
-from forms import LoginForm, CreateUserForm, ResetPasswordForm
+from forms import LoginForm, CreateUserForm, ResetPasswordForm, write_data, get_data
 import pickle
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "my super secret key"
-
-def write_data(dic):
-	data = dict()
-	try:
-		file = open('data.dat', 'rb')
-		data = pickle.load(file)
-	except EOFError:
-		pass
-	except FileNotFoundError:
-		pass
-	data = dic
-	file = open('data.dat', 'wb')
-	pickle.dump(data, file)
-
-def get_data():
-	data = dict()
-	try:
-		file = open('data.dat', 'rb')
-		data = pickle.load(file)
-	except EOFError:
-		pass
-	except FileNotFoundError:
-		pass
-	return data
 
 
 @app.route('/', methods=['GET', 'POST'])

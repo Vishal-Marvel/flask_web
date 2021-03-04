@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, DateTimeField, BooleanField
 from wtforms.validators import DataRequired
+import pickle
 
 class LoginForm(FlaskForm):
 	u_name = StringField("Username", validators=[DataRequired()])
@@ -24,3 +25,27 @@ class ResetPasswordForm(FlaskForm):
 	n_pass_w = PasswordField("New Password", validators=[DataRequired()],id='n_pass_w')
 	check = BooleanField('Show password', id='check')
 	submit = SubmitField("Submit")
+
+def write_data(dic):
+	data = dict()
+	try:
+		file = open('data.dat', 'rb')
+		data = pickle.load(file)
+	except EOFError:
+		pass
+	except FileNotFoundError:
+		pass
+	data = dic
+	file = open('data.dat', 'wb')
+	pickle.dump(data, file)
+
+def get_data():
+	data = dict()
+	try:
+		file = open('data.dat', 'rb')
+		data = pickle.load(file)
+	except EOFError:
+		pass
+	except FileNotFoundError:
+		pass
+	return data
